@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>離乳食ガイド — 月齢別スケジュール完全版</title>
+  <style>
+    :root {
+      --c1: #f4845f;
+      --c2: #e05f3a;
+      --c3: #b84428;
+      --c4: #7d2c14;
+      --bg: #fdf6f0;
+      --card: #ffffff;
+      --text: #2d1f1a;
+      --muted: #9e8070;
+      --border: #f0e0d6;
+      --green: #4caf7d;
+      --red: #e05252;
+      --blue: #4a90c4;
+      --yellow: #f5b942;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Meiryo', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      height: 56px;
+    }
+    .nav-logo {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--c2);
+      margin-right: auto;
+      white-space: nowrap;
+    }
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.82rem;
+      padding: 6px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      transition: all .2s;
+    }
+    .nav-links a:hover { background: var(--bg); color: var(--c2); }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, #fff5f0 0%, #fde8d8 50%, #fbd4be 100%);
+      padding: 64px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(244,132,95,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(224,95,58,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--c1);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 900;
+      color: var(--c3);
+      line-height: 1.25;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .hero p {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 32px;
+    }
+
+    /* ステージ概要バー */
+    .stage-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      max-width: 760px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    }
+    .stage-bar-item {
+      flex: 1;
+      padding: 14px 10px;
+      text-align: center;
+      color: #fff;
+      cursor: pointer;
+      transition: filter .2s;
+      text-decoration: none;
+    }
+    .stage-bar-item:hover { filter: brightness(1.1); }
+    .stage-bar-item:nth-child(1) { background: #f4845f; }
+    .stage-bar-item:nth-child(2) { background: #e05f3a; }
+    .stage-bar-item:nth-child(3) { background: #c0442a; }
+    .stage-bar-item:nth-child(4) { background: #8b2c14; }
+    .stage-bar-item .age { font-size: 0.7rem; opacity: 0.85; }
+    .stage-bar-item .name { font-size: 0.88rem; font-weight: 700; }
+    .stage-bar-item .kana { font-size: 0.75rem; opacity: 0.85; }
+
+    /* ===== CONTAINER ===== */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===== SECTION ===== */
+    section {
+      padding: 64px 0 32px;
+    }
+    .section-header {
+      margin-bottom: 32px;
+    }
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--c1);
+      margin-bottom: 8px;
+    }
+    .section-header h2 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--c3);
+      line-height: 1.3;
+    }
+    .section-header p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .divider {
+      width: 48px;
+      height: 4px;
+      border-radius: 2px;
+      margin: 12px 0 0;
+    }
+
+    /* ===== OVERVIEW GRID ===== */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 780px) { .overview-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 460px) { .overview-grid { grid-template-columns: 1fr; } }
+
+    .overview-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 20px 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      border-top: 4px solid;
+    }
+    .overview-card:nth-child(1) { border-color: #f4845f; }
+    .overview-card:nth-child(2) { border-color: #e05f3a; }
+    .overview-card:nth-child(3) { border-color: #c0442a; }
+    .overview-card:nth-child(4) { border-color: #8b2c14; }
+    .ov-age { font-size: 0.75rem; color: var(--muted); margin-bottom: 4px; }
+    .ov-title { font-size: 1rem; font-weight: 700; margin-bottom: 12px; }
+    .ov-detail { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+    .ov-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    /* ===== STAGE SECTION ===== */
+    .stage-section {
+      padding: 72px 0 48px;
+    }
+    .stage-title-block {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .stage-number {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      line-height: 1.2;
+      flex-shrink: 0;
+    }
+    .stage-number span { font-size: 1.6rem; font-weight: 900; line-height: 1; }
+
+    .stage-title-text h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 4px; }
+    .stage-title-text .sub { color: var(--muted); font-size: 0.9rem; }
+    .stage-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1.5px solid;
+    }
+
+    /* 2カラムレイアウト */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 680px) { .two-col { grid-template-columns: 1fr; } }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 780px) { .three-col { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .three-col { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+    .card-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card-title::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 14px;
+      border-radius: 2px;
+      background: var(--c1);
+    }
+
+    ul.detail-list {
+      list-style: none;
+      padding: 0;
+    }
+    ul.detail-list li {
+      padding: 6px 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #f5ede6;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    ul.detail-list li:last-child { border-bottom: none; }
+    ul.detail-list li::before {
+      content: '▸';
+      color: var(--c1);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* 食材タグ */
+    .food-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .food-tag {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      background: #fef3ed;
+      color: var(--c2);
+      border: 1px solid #f8d0bb;
+    }
+    .food-tag.new {
+      background: #e8f8ef;
+      color: #2e7d52;
+      border-color: #b2dfcc;
+    }
+
+    /* 週次テーブル */
+    .week-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+    }
+    .week-table th {
+      background: #fdf0e8;
+      padding: 8px 10px;
+      text-align: center;
+      font-weight: 700;
+      color: var(--c3);
+      font-size: 0.8rem;
+    }
+    .week-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #f5ede6;
+      vertical-align: top;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+    .week-table tr:last-child td { border-bottom: none; }
+    .week-table tr:hover td { background: #fffaf7; }
+
+    /* 1日のスケジュール */
+    .day-schedule {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .day-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .day-row:last-child { border-bottom: none; }
+    .day-time {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--c2);
+      min-width: 56px;
+      padding-top: 2px;
+    }
+    .day-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .day-label { font-size: 0.88rem; font-weight: 600; margin-bottom: 2px; }
+    .day-detail { font-size: 0.8rem; color: var(--muted); }
+
+    /* レシピカード */
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 680px) { .recipe-grid { grid-template-columns: 1fr 1fr; } }
+
+    .recipe-card {
+      background: var(--card);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    }
+    .recipe-thumb {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    .recipe-body { padding: 12px 14px; }
+    .recipe-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; }
+    .recipe-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+    /* ===== NG / アレルギー ===== */
+    .ng-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .ng-grid { grid-template-columns: 1fr; } }
+
+    .ng-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+    .ng-card h3 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    ul.ng-list {
+      list-style: none;
+      padding: 0;
+    }
+    ul.ng-list li {
+      font-size: 0.86rem;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+    ul.ng-list li:last-child { border-bottom: none; }
+    .icon-ng { color: var(--red); flex-shrink: 0; }
+    .icon-warn { color: var(--yellow); flex-shrink: 0; }
+    .icon-ok { color: var(--green); flex-shrink: 0; }
+
+    /* アレルゲン */
+    .allergen-wrap {
+      background: #fff5f5;
+      border: 1.5px solid #f5c6c6;
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 20px;
+    }
+    .allergen-wrap h3 { font-size: 1rem; font-weight: 700; color: var(--red); margin-bottom: 6px; }
+    .allergen-wrap p { font-size: 0.85rem; color: var(--muted); margin-bottom: 16px; }
+    .allergen-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .allergen-tag {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #fff;
+      border: 1.5px solid #f5c6c6;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 0.82rem;
+      color: var(--red);
+      font-weight: 600;
+    }
+    .allergen-tag .label { font-size: 0.65rem; color: var(--muted); margin-top: 2px; font-weight: 400; }
+
+    /* アレルギー導入テーブル */
+    .intro-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+      margin-top: 20px;
+    }
+    .intro-table th {
+      background: #fff5f5;
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--red);
+      border-bottom: 2px solid #f5c6c6;
+    }
+    .intro-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+    .intro-table tr:last-child td { border-bottom: none; }
+
+    /* ===== FAQセクション ===== */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .faq-item {
+      background: var(--card);
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+    .faq-q {
+      padding: 18px 20px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .faq-q::before {
+      content: 'Q';
+      display: inline-flex;
+      width: 24px;
+      height: 24px;
+      background: var(--c1);
+      color: #fff;
+      border-radius: 6px;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+    .faq-a {
+      padding: 0 20px 18px 56px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .faq-a strong { color: var(--text); }
+
+    /* ===== 準備チェックリスト ===== */
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .checklist-grid { grid-template-columns: 1fr; } }
+
+    .checklist-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    }
+    .checklist-card h3 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--c3);
+    }
+    ul.check-list {
+      list-style: none;
+      padding: 0;
+    }
+    ul.check-list li {
+      font-size: 0.86rem;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+    ul.check-list li:last-child { border-bottom: none; }
+    .check-icon { flex-shrink: 0; font-size: 0.9rem; margin-top: 1px; }
+
+    /* ===== 成長の目安 ===== */
+    .growth-section {
+      background: linear-gradient(135deg, #f0f7ff 0%, #e8f4ff 100%);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .growth-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+    @media (max-width: 640px) { .growth-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .growth-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .growth-card .age { font-size: 0.75rem; color: var(--muted); margin-bottom: 4px; }
+    .growth-card .weight { font-size: 1.2rem; font-weight: 800; color: var(--blue); }
+    .growth-card .note { font-size: 0.72rem; color: var(--muted); margin-top: 4px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--c4);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 0.82rem;
+      margin-top: 80px;
+    }
+    footer strong { color: #fff; }
+
+    /* ===== UTILITY ===== */
+    .mt-4 { margin-top: 16px; }
+    .mt-6 { margin-top: 24px; }
+    .mb-4 { margin-bottom: 16px; }
+    .highlight-box {
+      background: linear-gradient(135deg, #fff8f5 0%, #fdf0e8 100%);
+      border: 1.5px solid var(--border);
+      border-left: 4px solid var(--c1);
+      border-radius: 0 12px 12px 0;
+      padding: 14px 16px;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+    .highlight-box strong { color: var(--c2); }
+    .info-box {
+      background: #f0f7ff;
+      border: 1.5px solid #b8d8f5;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 0.86rem;
+      color: #2a5f8a;
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+    .warn-box {
+      background: #fffbf0;
+      border: 1.5px solid #f5dba0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 0.86rem;
+      color: #7a5a10;
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+
+    .text-s1 { color: #f4845f; }
+    .text-s2 { color: #e05f3a; }
+    .text-s3 { color: #c0442a; }
+    .text-s4 { color: #8b2c14; }
+    .bg-s1 { background: #f4845f; }
+    .bg-s2 { background: #e05f3a; }
+    .bg-s3 { background: #c0442a; }
+    .bg-s4 { background: #8b2c14; }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">🍼 離乳食ガイド</div>
+    <div class="nav-links">
+      <a href="#overview">概要</a>
+      <a href="#stage1">ゴックン期</a>
+      <a href="#stage2">モグモグ期</a>
+      <a href="#stage3">カミカミ期</a>
+      <a href="#stage4">パクパク期</a>
+      <a href="#allergy">アレルギー</a>
+      <a href="#ng">NG食材</a>
+      <a href="#prep">準備</a>
+      <a href="#faq">Q&amp;A</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-eyebrow">BABY WEANING GUIDE</div>
+  <h1>離乳食<br>完全スケジュールガイド</h1>
+  <p>生後5ヶ月から1歳6ヶ月まで。月齢別の食材・量・かたさ・1日の流れをまとめました。</p>
+  <div class="stage-bar">
+    <a href="#stage1" class="stage-bar-item">
+      <div class="age">5〜6ヶ月</div>
+      <div class="name">離乳初期</div>
+      <div class="kana">ゴックン期</div>
+    </a>
+    <a href="#stage2" class="stage-bar-item">
+      <div class="age">7〜8ヶ月</div>
+      <div class="name">離乳中期</div>
+      <div class="kana">モグモグ期</div>
+    </a>
+    <a href="#stage3" class="stage-bar-item">
+      <div class="age">9〜11ヶ月</div>
+      <div class="name">離乳後期</div>
+      <div class="kana">カミカミ期</div>
+    </a>
+    <a href="#stage4" class="stage-bar-item">
+      <div class="age">12〜18ヶ月</div>
+      <div class="name">離乳完了期</div>
+      <div class="kana">パクパク期</div>
+    </a>
+  </div>
+</div>
+
+<!-- ===== OVERVIEW ===== -->
+<section id="overview">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">OVERVIEW</div>
+      <h2>離乳食とは</h2>
+      <div class="divider bg-s1"></div>
+      <p>母乳・ミルクだけの栄養から、少しずつ「食べる」ことを覚えていくプロセスです。急がず焦らず、赤ちゃんのペースに合わせて進めましょう。</p>
+    </div>
+
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="ov-age">生後 5〜6ヶ月</div>
+        <div class="ov-badge bg-s1">離乳初期</div>
+        <div class="ov-title">ゴックン期</div>
+        <div class="ov-detail">1日1回・午前中<br>なめらかペースト<br>10倍がゆから開始</div>
+      </div>
+      <div class="overview-card">
+        <div class="ov-age">生後 7〜8ヶ月</div>
+        <div class="ov-badge bg-s2">離乳中期</div>
+        <div class="ov-title">モグモグ期</div>
+        <div class="ov-detail">1日2回に増やす<br>舌でつぶせる固さ<br>タンパク質を追加</div>
+      </div>
+      <div class="overview-card">
+        <div class="ov-age">生後 9〜11ヶ月</div>
+        <div class="ov-badge bg-s3">離乳後期</div>
+        <div class="ov-title">カミカミ期</div>
+        <div class="ov-detail">1日3回に増やす<br>歯茎でつぶせる固さ<br>手づかみ食べ開始</div>
+      </div>
+      <div class="overview-card">
+        <div class="ov-age">生後 12〜18ヶ月</div>
+        <div class="ov-badge bg-s4">離乳完了期</div>
+        <div class="ov-title">パクパク期</div>
+        <div class="ov-detail">1日3回＋おやつ<br>家族と同じ食卓へ<br>普通のご飯に移行</div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <strong>大切な3原則：</strong>
+      ①新しい食材は<strong>1日1種類・午前中</strong>に試す（夕方は受診できないため）
+      ②食べない・泣く日は無理強いせず次の日に試す
+      ③食後は欲しがる分だけ授乳・ミルクをあげる（1歳まで栄養の主役は母乳・ミルク）
+    </div>
+  </div>
+</section>
+
+<!-- ===== STAGE 1 ===== -->
+<section id="stage1" class="stage-section">
+  <div class="container">
+    <div class="stage-title-block">
+      <div class="stage-number bg-s1" style="border-radius:18px;">
+        <span>1</span>
+        <div style="font-size:0.6rem;">STAGE</div>
+      </div>
+      <div class="stage-title-text">
+        <h2 class="text-s1">離乳初期 — ゴックン期</h2>
+        <div class="sub">生後 5〜6ヶ月 ／ 1日1回 ／ 午前中に</div>
+        <div class="stage-chips">
+          <span class="chip" style="color:#f4845f;border-color:#f4845f;">☀ 1日1回</span>
+          <span class="chip" style="color:#f4845f;border-color:#f4845f;">ペースト・なめらか状</span>
+          <span class="chip" style="color:#f4845f;border-color:#f4845f;">10倍がゆスタート</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">始めるサイン（こんな様子が見られたら）</div>
+        <ul class="detail-list">
+          <li>首がしっかりすわっている</li>
+          <li>大人の食事に興味を持ち始めた（よだれが出る・見つめる）</li>
+          <li>支えると座れる（ベビーチェアで安定する）</li>
+          <li>スプーンを口に入れても舌で押し出さなくなった</li>
+          <li>体重が出生時の約2倍になっている</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">かたさ・形状</div>
+        <ul class="detail-list">
+          <li><strong>10倍がゆ</strong>：米1 対 水10で炊いて裏ごし（ポタージュ状）</li>
+          <li>野菜はゆでてから裏ごし or ブレンダーでなめらかに</li>
+          <li>豆腐は加熱して裏ごし</li>
+          <li>魚は加熱して指でつぶれる柔らかさ → すりつぶす</li>
+          <li>水分が足りなければ煮汁・湯冷ましで伸ばす</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="three-col">
+      <div class="card">
+        <div class="card-title">OKな炭水化物</div>
+        <div class="food-tags">
+          <span class="food-tag">10倍がゆ</span>
+          <span class="food-tag">パン粥（食パン）</span>
+          <span class="food-tag">うどん（やわらかく）</span>
+          <span class="food-tag">そうめん</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">OKな野菜・果物</div>
+        <div class="food-tags">
+          <span class="food-tag">にんじん</span>
+          <span class="food-tag">かぼちゃ</span>
+          <span class="food-tag">さつまいも</span>
+          <span class="food-tag">じゃがいも</span>
+          <span class="food-tag">大根</span>
+          <span class="food-tag">ほうれん草</span>
+          <span class="food-tag">小松菜</span>
+          <span class="food-tag">りんご</span>
+          <span class="food-tag">バナナ</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">OKなたんぱく質（3週目〜）</div>
+        <div class="food-tags">
+          <span class="food-tag">豆腐（絹ごし）</span>
+          <span class="food-tag">白身魚（たい）</span>
+          <span class="food-tag">白身魚（ひらめ）</span>
+          <span class="food-tag">かれい</span>
+          <span class="food-tag">しらす（塩抜き）</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mt-4">
+      <div class="card-title">週次の量の目安（1食あたり）</div>
+      <table class="week-table">
+        <tr>
+          <th>週</th><th>10倍がゆ</th><th>野菜・果物</th><th>たんぱく質</th><th>ポイント</th>
+        </tr>
+        <tr>
+          <td><strong>1週目</strong></td>
+          <td>小さじ1（5g）</td>
+          <td>—</td>
+          <td>—</td>
+          <td>まず1さじから。飲み込めるかを確認</td>
+        </tr>
+        <tr>
+          <td><strong>2週目</strong></td>
+          <td>小さじ2〜3</td>
+          <td>小さじ1<br>（1種類）</td>
+          <td>—</td>
+          <td>野菜を1種類追加。2〜3日続けてから次へ</td>
+        </tr>
+        <tr>
+          <td><strong>3週目</strong></td>
+          <td>小さじ4〜5（20〜25g）</td>
+          <td>小さじ2<br>（2種類）</td>
+          <td>豆腐 小さじ1</td>
+          <td>たんぱく質を少量追加</td>
+        </tr>
+        <tr>
+          <td><strong>4週目</strong></td>
+          <td>大さじ2（30g）</td>
+          <td>小さじ2〜3<br>（10〜15g）</td>
+          <td>豆腐10g<br>or 魚5g</td>
+          <td>慣れてきたら魚にもチャレンジ</td>
+        </tr>
+        <tr>
+          <td><strong>6ヶ月末</strong></td>
+          <td>30g</td>
+          <td>15〜20g</td>
+          <td>豆腐15g<br>魚5〜10g</td>
+          <td>2回食への移行を検討し始める</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="two-col mt-4">
+      <div class="card">
+        <div class="card-title">1日のスケジュール例（5〜6ヶ月）</div>
+        <div class="day-schedule">
+          <div class="day-row">
+            <div class="day-time">6:00</div>
+            <div class="day-dot" style="background:#f4845f;"></div>
+            <div><div class="day-label">起床・授乳①</div><div class="day-detail">朝一番の授乳</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">10:00</div>
+            <div class="day-dot" style="background:#f4845f;"></div>
+            <div><div class="day-label">離乳食 ＋ 授乳②</div><div class="day-detail">午前中に離乳食→欲しがるだけ授乳</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">14:00</div>
+            <div class="day-dot" style="background:#ddd;"></div>
+            <div><div class="day-label">授乳③</div><div class="day-detail">昼の授乳</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">18:00</div>
+            <div class="day-dot" style="background:#ddd;"></div>
+            <div><div class="day-label">授乳④</div><div class="day-detail">夕方の授乳</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">22:00</div>
+            <div class="day-dot" style="background:#ddd;"></div>
+            <div><div class="day-label">授乳⑤・就寝</div><div class="day-detail">就寝前授乳</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">はじめてのメニュー例</div>
+        <div class="recipe-grid" style="grid-template-columns:1fr 1fr;">
+          <div class="recipe-card">
+            <div class="recipe-thumb" style="background:#fef3e8;">🍚</div>
+            <div class="recipe-body">
+              <div class="recipe-name">10倍がゆ</div>
+              <div class="recipe-desc">裏ごしして完全にとろとろに</div>
+            </div>
+          </div>
+          <div class="recipe-card">
+            <div class="recipe-thumb" style="background:#fff5e0;">🥕</div>
+            <div class="recipe-body">
+              <div class="recipe-name">にんじんポタージュ</div>
+              <div class="recipe-desc">やわらかく煮て裏ごし、ゆで汁で伸ばす</div>
+            </div>
+          </div>
+          <div class="recipe-card">
+            <div class="recipe-thumb" style="background:#f0fff4;">🥬</div>
+            <div class="recipe-body">
+              <div class="recipe-name">かぼちゃペースト</div>
+              <div class="recipe-desc">皮を除いて加熱、なめらかに</div>
+            </div>
+          </div>
+          <div class="recipe-card">
+            <div class="recipe-thumb" style="background:#f5f5ff;">🐟</div>
+            <div class="recipe-body">
+              <div class="recipe-name">白身魚がゆ</div>
+              <div class="recipe-desc">たいを蒸してほぐし、がゆに混ぜる</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box mt-4">
+      💡 <strong>食べてくれないときのコツ：</strong>
+      お粥に野菜の甘みを混ぜると食べやすくなることがあります。かぼちゃ・さつまいも・バナナは自然な甘みがあり人気です。「食べること」自体に慣れさせることが目的なので、量は気にしすぎないで大丈夫です。
+    </div>
+  </div>
+</section>
+
+<!-- ===== STAGE 2 ===== -->
+<section id="stage2" class="stage-section" style="background:linear-gradient(180deg,#fdf6f0 0%,#fefaf8 100%);">
+  <div class="container">
+    <div class="stage-title-block">
+      <div class="stage-number bg-s2" style="border-radius:18px;">
+        <span>2</span>
+        <div style="font-size:0.6rem;">STAGE</div>
+      </div>
+      <div class="stage-title-text">
+        <h2 class="text-s2">離乳中期 — モグモグ期</h2>
+        <div class="sub">生後 7〜8ヶ月 ／ 1日2回 ／ 朝・昼のイメージで</div>
+        <div class="stage-chips">
+          <span class="chip" style="color:#e05f3a;border-color:#e05f3a;">☀🌤 1日2回</span>
+          <span class="chip" style="color:#e05f3a;border-color:#e05f3a;">絹ごし豆腐くらいの固さ</span>
+          <span class="chip" style="color:#e05f3a;border-color:#e05f3a;">7倍がゆ</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">2回食への移行のポイント</div>
+        <ul class="detail-list">
+          <li>1回食に慣れてから（だいたい7ヶ月頃）移行する</li>
+          <li>2回目は1回目の半量程度からスタート</li>
+          <li>2食の間隔は<strong>4時間以上</strong>あける</li>
+          <li>昼間に2回食べる生活リズムを作っていく</li>
+          <li>夕食に近い時間に2回目を設定すると後の3回食移行がスムーズ</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">かたさ・形状</div>
+        <ul class="detail-list">
+          <li><strong>7倍がゆ</strong>（米1：水7）。粒感が少し残る程度</li>
+          <li>野菜は<strong>みじん切り〜粗みじん切り</strong>（2〜3mm角）</li>
+          <li>豆腐は加熱後に細かく崩す</li>
+          <li>魚・肉はしっかり加熱後、細かくほぐす</li>
+          <li>目安：舌と上あごでつぶれるやわらかさ</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="three-col">
+      <div class="card">
+        <div class="card-title">新たに追加できる食材（炭水化物）</div>
+        <div class="food-tags">
+          <span class="food-tag">7倍がゆ</span>
+          <span class="food-tag new">食パン（やわらかく）</span>
+          <span class="food-tag new">うどん（みじん切り）</span>
+          <span class="food-tag new">そうめん</span>
+          <span class="food-tag new">じゃがいも</span>
+        </div>
+        <div style="font-size:0.75rem;color:var(--green);margin-top:8px;">🟢 緑 = このステージから追加</div>
+      </div>
+      <div class="card">
+        <div class="card-title">新たに追加できる野菜・果物</div>
+        <div class="food-tags">
+          <span class="food-tag new">ブロッコリー</span>
+          <span class="food-tag new">玉ねぎ</span>
+          <span class="food-tag new">トマト（皮・種除く）</span>
+          <span class="food-tag new">キャベツ</span>
+          <span class="food-tag new">なす</span>
+          <span class="food-tag new">バナナ</span>
+          <span class="food-tag new">いちご</span>
+          <span class="food-tag new">もも</span>
+          <span class="food-tag">にんじん</span>
+          <span class="food-tag">かぼちゃ</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">新たに追加できるたんぱく質</div>
+        <div class="food-tags">
+          <span class="food-tag new">鶏ひき肉（ささみ）</span>
+          <span class="food-tag new">卵黄（固ゆで）</span>
+          <span class="food-tag new">ヨーグルト（無糖）</span>
+          <span class="food-tag new">カッテージチーズ</span>
+          <span class="food-tag new">さけ（あぶらの少ない部位）</span>
+          <span class="food-tag new">まぐろ（赤身）</span>
+          <span class="food-tag">豆腐</span>
+          <span class="food-tag">白身魚</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mt-4">
+      <div class="card-title">量の目安（1食あたり）</div>
+      <table class="week-table">
+        <tr>
+          <th>食材グループ</th><th>7ヶ月</th><th>8ヶ月</th><th>目安の形状</th>
+        </tr>
+        <tr>
+          <td>炭水化物（お粥）</td>
+          <td>50g</td>
+          <td>80g</td>
+          <td>7倍がゆ。粒感少しあり</td>
+        </tr>
+        <tr>
+          <td>野菜・果物</td>
+          <td>20g</td>
+          <td>30g</td>
+          <td>みじん切り2〜3mm角</td>
+        </tr>
+        <tr>
+          <td>豆腐</td>
+          <td>30g</td>
+          <td>40g</td>
+          <td>細かく崩す（絹ごし）</td>
+        </tr>
+        <tr>
+          <td>魚 or 肉（どちらか1つ）</td>
+          <td>10g</td>
+          <td>15g</td>
+          <td>細かくほぐす</td>
+        </tr>
+        <tr>
+          <td>卵（卵黄のみ）</td>
+          <td>卵黄1個</td>
+          <td>全卵1/3個</td>
+          <td>固ゆでにして細かく</td>
+        </tr>
+        <tr>
+          <td>乳製品（ヨーグルト等）</td>
+          <td>50g</td>
+          <td>70g</td>
+          <td>無糖のもの</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="two-col mt-4">
+      <div class="card">
+        <div class="card-title">1日のスケジュール例（7〜8ヶ月）</div>
+        <div class="day-schedule">
+          <div class="day-row">
+            <div class="day-time">6:00</div>
+            <div class="day-dot" style="background:#ddd;"></div>
+            <div><div class="day-label">起床・授乳①</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">10:00</div>
+            <div class="day-dot" style="background:#e05f3a;"></div>
+            <div><div class="day-label">離乳食①＋授乳②</div><div class="day-detail">1食目。食後すぐに授乳</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">14:00</div>
+            <div class="day-dot" style="background:#e05f3a;"></div>
+            <div><div class="day-label">離乳食②＋授乳③</div><div class="day-detail">2食目（1食目より少なめから）</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">18:00</div>
+            <div class="day-dot" style="background:#ddd;"></div>
+            <div><div class="day-label">授乳④</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">22:00</div>
+            <div class="day-dot" style="background:#ddd;"></div>
+            <div><div class="day-label">授乳⑤・就寝</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">おすすめメニュー例</div>
+        <div class="recipe-grid" style="grid-template-columns:1fr 1fr;">
+          <div class="recipe-card">
+            <div class="recipe-thumb" style="background:#fef3e8;">🐔</div>
+            <div class="recipe-body">
+              <div class="recipe-name">鶏ひきとにんじんのお粥</div>
+              <div class="recipe-desc">鶏ひき肉をよく炒め、7倍がゆに混ぜる</div>
+            </div>
+          </div>
+          <div class="recipe-card">
+            <div class="recipe-thumb" style="background:#fffae0;">🥚</div>
+            <div class="recipe-body">
+              <div class="recipe-name">卵黄がゆ</div>
+              <div class="recipe-desc">固ゆで卵黄を裏ごしして、お粥に</div>
+            </div>
+          </div>
+          <div class="recipe-card">
+            <div class="recipe-thumb" style="background:#f5f5ff;">🐟</div>
+            <div class="recipe-body">
+              <div class="recipe-name">さけと野菜の煮物</div>
+              <div class="recipe-desc">さけ・大根・にんじんをだしで煮てほぐす</div>
+            </div>
+          </div>
+          <div class="recipe-card">
+            <div class="recipe-thumb" style="background:#f0fff4;">🥦</div>
+            <div class="recipe-body">
+              <div class="recipe-name">豆腐のブロッコリーあえ</div>
+              <div class="recipe-desc">両方加熱後に混ぜるだけ。手軽で栄養満点</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STAGE 3 ===== -->
+<section id="stage3" class="stage-section">
+  <div class="container">
+    <div class="stage-title-block">
+      <div class="stage-number bg-s3" style="border-radius:18px;">
+        <span>3</span>
+        <div style="font-size:0.6rem;">STAGE</div>
+      </div>
+      <div class="stage-title-text">
+        <h2 class="text-s3">離乳後期 — カミカミ期</h2>
+        <div class="sub">生後 9〜11ヶ月 ／ 1日3回 ／ 家族と同じ食卓で</div>
+        <div class="stage-chips">
+          <span class="chip" style="color:#c0442a;border-color:#c0442a;">☀🌤🌙 1日3回</span>
+          <span class="chip" style="color:#c0442a;border-color:#c0442a;">バナナくらいの固さ</span>
+          <span class="chip" style="color:#c0442a;border-color:#c0442a;">手づかみ食べ開始</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">3回食への移行のポイント</div>
+        <ul class="detail-list">
+          <li>2回食が安定してから（9ヶ月頃）移行する</li>
+          <li>朝・昼・夕のリズムを整える</li>
+          <li>家族の食事時間に合わせると習慣になりやすい</li>
+          <li>手づかみ食べを積極的に促す（脳の発達に良い）</li>
+          <li>おやつはまだ基本的に不要（授乳で補う）</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">かたさ・形状</div>
+        <ul class="detail-list">
+          <li><strong>全がゆ（5倍がゆ）</strong>（米1：水5）</li>
+          <li>野菜は<strong>5〜8mm角</strong>に切る</li>
+          <li>指でつまんで軽くつぶれるやわらかさ</li>
+          <li>バナナを指で押しつぶせる固さが目安</li>
+          <li>手づかみ用は少し大きめ（持てる大きさ）に</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="three-col">
+      <div class="card">
+        <div class="card-title">炭水化物</div>
+        <div class="food-tags">
+          <span class="food-tag">全がゆ（5倍）</span>
+          <span class="food-tag new">軟飯</span>
+          <span class="food-tag">食パン</span>
+          <span class="food-tag">うどん</span>
+          <span class="food-tag new">スパゲッティ（やわらかく）</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">新たに追加できる野菜・きのこ</div>
+        <div class="food-tags">
+          <span class="food-tag new">きのこ（しいたけ・えのき）</span>
+          <span class="food-tag new">ごぼう（少量）</span>
+          <span class="food-tag new">レンコン</span>
+          <span class="food-tag new">とうもろこし</span>
+          <span class="food-tag new">アボカド</span>
+          <span class="food-tag">ブロッコリー</span>
+          <span class="food-tag">トマト</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">新たに追加できるたんぱく質</div>
+        <div class="food-tags">
+          <span class="food-tag new">全卵（1/2個）</span>
+          <span class="food-tag new">牛ひき肉</span>
+          <span class="food-tag new">豚ひき肉</span>
+          <span class="food-tag new">納豆（ひきわり）</span>
+          <span class="food-tag new">プロセスチーズ</span>
+          <span class="food-tag new">あじ・さんま（骨注意）</span>
+          <span class="food-tag">鶏ひき肉</span>
+          <span class="food-tag">豆腐</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mt-4">
+      <div class="card-title">量の目安（1食あたり）</div>
+      <table class="week-table">
+        <tr>
+          <th>食材グループ</th><th>9〜10ヶ月</th><th>11ヶ月</th><th>目安の形状</th>
+        </tr>
+        <tr>
+          <td>炭水化物（全がゆ）</td>
+          <td>90g</td>
+          <td>90〜軟飯80g</td>
+          <td>全がゆ。つぶつぶあり</td>
+        </tr>
+        <tr>
+          <td>野菜・果物</td>
+          <td>30g</td>
+          <td>40g</td>
+          <td>5〜8mm角</td>
+        </tr>
+        <tr>
+          <td>豆腐</td>
+          <td>45g</td>
+          <td>45g</td>
+          <td>崩す（絹・木綿どちらも）</td>
+        </tr>
+        <tr>
+          <td>魚 or 肉</td>
+          <td>15g</td>
+          <td>15g</td>
+          <td>ほぐして5mm角程度</td>
+        </tr>
+        <tr>
+          <td>卵</td>
+          <td>全卵1/2個</td>
+          <td>全卵1/2個</td>
+          <td>炒り卵・ゆで卵</td>
+        </tr>
+        <tr>
+          <td>乳製品</td>
+          <td>80g</td>
+          <td>80g</td>
+          <td>ヨーグルト・チーズ</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="two-col mt-4">
+      <div class="card">
+        <div class="card-title">1日のスケジュール例（9〜11ヶ月）</div>
+        <div class="day-schedule">
+          <div class="day-row">
+            <div class="day-time">7:00</div>
+            <div class="day-dot" style="background:#c0442a;"></div>
+            <div><div class="day-label">起床・離乳食①＋授乳</div><div class="day-detail">朝食。家族と一緒に</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">10:00</div>
+            <div class="day-dot" style="background:#ddd;"></div>
+            <div><div class="day-label">授乳</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">12:00</div>
+            <div class="day-dot" style="background:#c0442a;"></div>
+            <div><div class="day-label">離乳食②＋授乳</div><div class="day-detail">昼食。手づかみ食べも積極的に</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">15:00</div>
+            <div class="day-dot" style="background:#ddd;"></div>
+            <div><div class="day-label">授乳</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">18:00</div>
+            <div class="day-dot" style="background:#c0442a;"></div>
+            <div><div class="day-label">離乳食③＋授乳</div><div class="day-detail">夕食。家族と同じ時間に</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">21:00</div>
+            <div class="day-dot" style="background:#ddd;"></div>
+            <div><div class="day-label">就寝前授乳・就寝</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">手づかみ食べメニュー例</div>
+        <ul class="detail-list">
+          <li>蒸し野菜スティック（にんじん・かぼちゃ・じゃがいも）</li>
+          <li>おにぎり（小さくにぎる）</li>
+          <li>食パントースト（小さく切る）</li>
+          <li>バナナ（1cm厚に切る）</li>
+          <li>卵焼き（やわらかめに焼く）</li>
+          <li>煮豆腐のひとくちサイズ</li>
+          <li>ミートボール（やわらかく）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STAGE 4 ===== -->
+<section id="stage4" class="stage-section" style="background:linear-gradient(180deg,#fdf6f0 0%,#fefaf8 100%);">
+  <div class="container">
+    <div class="stage-title-block">
+      <div class="stage-number bg-s4" style="border-radius:18px;">
+        <span>4</span>
+        <div style="font-size:0.6rem;">STAGE</div>
+      </div>
+      <div class="stage-title-text">
+        <h2 class="text-s4">離乳完了期 — パクパク期</h2>
+        <div class="sub">生後 12〜18ヶ月 ／ 1日3回＋おやつ ／ 家族と同じ食事へ</div>
+        <div class="stage-chips">
+          <span class="chip" style="color:#8b2c14;border-color:#8b2c14;">1日3回＋おやつ</span>
+          <span class="chip" style="color:#8b2c14;border-color:#8b2c14;">肉団子くらいの固さ</span>
+          <span class="chip" style="color:#8b2c14;border-color:#8b2c14;">卒乳・断乳の時期</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">この時期の特徴</div>
+        <ul class="detail-list">
+          <li>3回の食事でほとんどの栄養をまかなえるようになる</li>
+          <li>牛乳を飲み物として与えてOK（1日200〜400ml程度）</li>
+          <li>おやつは「4回目の食事」として栄養補給のために与える</li>
+          <li>ご飯・おかずを分けて食べられるようになる（バラ食い）</li>
+          <li>スプーン・フォークを自分で使い始める</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">かたさ・形状</div>
+        <ul class="detail-list">
+          <li>軟飯（やわらかめのご飯）から普通のご飯へ移行</li>
+          <li>指でつまんでつぶれる固さ（肉団子程度）</li>
+          <li>1〜1.5cm角が目安</li>
+          <li>咀嚼の力が育ってきたら普通の食事に近づけていく</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card mt-4">
+      <div class="card-title">量の目安（1食あたり）</div>
+      <table class="week-table">
+        <tr>
+          <th>食材グループ</th><th>12〜15ヶ月</th><th>15〜18ヶ月</th><th>備考</th>
+        </tr>
+        <tr><td>主食（軟飯→ご飯）</td><td>80〜90g</td><td>90g</td><td>少しずつ硬さを上げる</td></tr>
+        <tr><td>野菜・果物</td><td>40g</td><td>50g</td><td>1〜1.5cm角</td></tr>
+        <tr><td>豆腐</td><td>50〜55g</td><td>55g</td><td>木綿豆腐も問題なし</td></tr>
+        <tr><td>魚 or 肉</td><td>15〜20g</td><td>20g</td><td>薄切り・ひき肉など</td></tr>
+        <tr><td>卵</td><td>2/3個</td><td>1個</td><td>炒り卵・ゆで卵・薄焼き卵</td></tr>
+        <tr><td>乳製品</td><td>100g</td><td>100g</td><td>牛乳200ml＋チーズ等</td></tr>
+        <tr><td>おやつ（1〜2回）</td><td colspan="2">100〜150kcal程度</td><td>おにぎり・蒸しパン・果物など</td></tr>
+      </table>
+    </div>
+
+    <div class="two-col mt-4">
+      <div class="card">
+        <div class="card-title">1日のスケジュール例（12〜18ヶ月）</div>
+        <div class="day-schedule">
+          <div class="day-row">
+            <div class="day-time">7:00</div>
+            <div class="day-dot" style="background:#8b2c14;"></div>
+            <div><div class="day-label">朝食（離乳食①）</div><div class="day-detail">ご飯・おかず・みそ汁（薄味）</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">10:00</div>
+            <div class="day-dot" style="background:#f4845f;"></div>
+            <div><div class="day-label">おやつ①</div><div class="day-detail">果物・おにぎり・蒸しパンなど</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">12:00</div>
+            <div class="day-dot" style="background:#8b2c14;"></div>
+            <div><div class="day-label">昼食（離乳食②）</div><div class="day-detail">うどん・パスタ・ご飯など</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">15:00</div>
+            <div class="day-dot" style="background:#f4845f;"></div>
+            <div><div class="day-label">おやつ②（必要に応じて）</div><div class="day-detail">ヨーグルト・果物など</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">18:00</div>
+            <div class="day-dot" style="background:#8b2c14;"></div>
+            <div><div class="day-label">夕食（離乳食③）</div><div class="day-detail">家族のメニューを薄味にアレンジ</div></div>
+          </div>
+          <div class="day-row">
+            <div class="day-time">21:00</div>
+            <div class="day-dot" style="background:#ddd;"></div>
+            <div><div class="day-label">就寝</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">おすすめのおやつ例</div>
+        <ul class="detail-list">
+          <li>おにぎり（小さめ・のりなし or やわらかく）</li>
+          <li>蒸しパン・バナナパン（砂糖少なめ）</li>
+          <li>ヨーグルト（無糖＋フルーツ）</li>
+          <li>さつまいも蒸し</li>
+          <li>果物（バナナ・りんご・いちご）</li>
+          <li>チーズ（プロセスチーズ小量）</li>
+          <li>ボーロ・せんべい（赤ちゃん用）</li>
+        </ul>
+        <div class="warn-box" style="margin-top:12px;">
+          ⚠ 市販のお菓子は<strong>塩分・砂糖が多い</strong>ので「赤ちゃん用」と表記のあるものを選ぶ。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== アレルギー ===== -->
+<section id="allergy">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">ALLERGY</div>
+      <h2>アレルギーへの対応</h2>
+      <div class="divider" style="background:var(--red);"></div>
+      <p>食物アレルギーは離乳食で最も注意が必要なポイントです。正しい知識で安全に進めましょう。</p>
+    </div>
+
+    <div class="allergen-wrap">
+      <h3>特定原材料（義務表示）— 特に注意が必要な8品目</h3>
+      <p>アレルギー症状（じんましん・嘔吐・呼吸困難など）が起きやすい食材です。初めて与えるときは<strong>午前中に1さじ</strong>から。</p>
+      <div class="allergen-tags">
+        <div class="allergen-tag">🥚<br>卵<div class="label">最多アレルゲン</div></div>
+        <div class="allergen-tag">🥛<br>乳<div class="label">牛乳・乳製品</div></div>
+        <div class="allergen-tag">🌾<br>小麦<div class="label">パン・うどん</div></div>
+        <div class="allergen-tag">🦐<br>えび<div class="label">加工品も注意</div></div>
+        <div class="allergen-tag">🦀<br>かに<div class="label">加工品も注意</div></div>
+        <div class="allergen-tag">🍜<br>そば<div class="label">重篤化しやすい</div></div>
+        <div class="allergen-tag">🥜<br>落花生<div class="label">ピーナッツ</div></div>
+        <div class="allergen-tag">🌰<br>くるみ<div class="label">2023年追加</div></div>
+      </div>
+    </div>
+
+    <table class="intro-table mt-6">
+      <tr>
+        <th>食材</th>
+        <th>導入時期の目安</th>
+        <th>与え方のポイント</th>
+        <th>症状が出たら</th>
+      </tr>
+      <tr>
+        <td><strong>卵（卵黄）</strong></td>
+        <td>7〜8ヶ月（固ゆで卵黄から）</td>
+        <td>固ゆで→黄身のみ→全卵の順で。必ず加熱</td>
+        <td rowspan="8" style="color:var(--red);font-size:0.85rem;vertical-align:middle;">
+          口周りの赤み・じんましん・嘔吐・顔のむくみが出たら<br><strong>すぐに食事を止め</strong>、症状が強ければ<strong>救急受診</strong>。<br><br>記録しておくと：①何を食べたか②何分後か③どんな症状か
+        </td>
+      </tr>
+      <tr>
+        <td><strong>小麦</strong></td>
+        <td>6〜7ヶ月（パン粥・うどんから）</td>
+        <td>加熱したものから。量は少量ずつ増やす</td>
+      </tr>
+      <tr>
+        <td><strong>乳製品</strong></td>
+        <td>7〜8ヶ月（ヨーグルト・チーズから）</td>
+        <td>牛乳の飲み物は1歳〜。加工品から始める</td>
+      </tr>
+      <tr>
+        <td><strong>落花生（ピーナッツ）</strong></td>
+        <td>1歳以降（ペースト状にして少量）</td>
+        <td>そのままの形は窒息危険。粉砕orペーストで</td>
+      </tr>
+      <tr>
+        <td><strong>そば</strong></td>
+        <td>1歳以降（少量から・慎重に）</td>
+        <td>重篤化しやすいため特に慎重に。かかりつけ医に相談も</td>
+      </tr>
+      <tr>
+        <td><strong>えび・かに</strong></td>
+        <td>1歳以降（しっかり加熱して少量）</td>
+        <td>加熱しても反応する場合あり。加工品にも含まれる</td>
+      </tr>
+      <tr>
+        <td><strong>くるみ</strong></td>
+        <td>1歳以降（ペースト状にして少量）</td>
+        <td>増加傾向にある。そのままは窒息危険</td>
+      </tr>
+      <tr>
+        <td><strong>大豆（豆腐・納豆）</strong></td>
+        <td>5〜6ヶ月（豆腐から）</td>
+        <td>加熱した絹ごし豆腐から。大豆アレルギーは比較的少ない</td>
+      </tr>
+    </table>
+
+    <div class="info-box mt-4">
+      💡 <strong>アレルギーが心配な場合は：</strong>
+      かかりつけの小児科に「離乳食のアレルギー相談」として受診するのが安心です。家族にアレルギーがある場合は特に早めに相談しましょう。血液検査で事前確認ができる場合もあります。
+    </div>
+  </div>
+</section>
+
+<!-- ===== NG食材 ===== -->
+<section id="ng" style="background:#fffbf8;padding:64px 0 32px;">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">DANGER</div>
+      <h2>NG食材・注意が必要な食材</h2>
+      <div class="divider" style="background:var(--red);"></div>
+    </div>
+
+    <div class="ng-grid">
+      <div class="ng-card">
+        <h3 style="color:var(--red);">🚫 1歳未満は絶対NG</h3>
+        <ul class="ng-list">
+          <li><span class="icon-ng">✕</span><div><strong>はちみつ</strong> — 乳児ボツリヌス症の原因。加工品（はちみつ入りパン等）も不可</div></li>
+          <li><span class="icon-ng">✕</span><div><strong>牛乳（飲み物として）</strong> — 腎臓への負担大。料理に少量使うのはOK（7〜8ヶ月〜）</div></li>
+          <li><span class="icon-ng">✕</span><div><strong>生卵・半熟卵</strong> — サルモネラ菌の危険。必ず固ゆで・加熱で</div></li>
+          <li><span class="icon-ng">✕</span><div><strong>生魚（刺身・寿司）</strong> — 感染リスク。必ず加熱する</div></li>
+          <li><span class="icon-ng">✕</span><div><strong>そのままのナッツ・豆類</strong> — 気管に詰まる窒息リスク。1歳以降もペースト状で</div></li>
+          <li><span class="icon-ng">✕</span><div><strong>こんにゃく・白玉・餅</strong> — 喉に詰まりやすい。1歳以降も小さく切って注意</div></li>
+          <li><span class="icon-ng">✕</span><div><strong>生野菜（固いまま）</strong> — 消化に悪い。必ず加熱してから</div></li>
+        </ul>
+      </div>
+
+      <div class="ng-card">
+        <h3 style="color:var(--yellow);">⚠ 量・調理法に注意</h3>
+        <ul class="ng-list">
+          <li><span class="icon-warn">!</span><div><strong>塩分・砂糖</strong> — 大人の1/3〜1/4以下に。薄味を心がける</div></li>
+          <li><span class="icon-warn">!</span><div><strong>市販のだし・めんつゆ</strong> — 塩分が多い。「食塩不使用」タイプを選ぶ</div></li>
+          <li><span class="icon-warn">!</span><div><strong>しらす・ちりめんじゃこ</strong> — 塩分が多い。熱湯をかけて塩抜きしてから</div></li>
+          <li><span class="icon-warn">!</span><div><strong>青魚（さば・いわし）</strong> — アレルギー・鮮度に注意。新鮮なものを少量から</div></li>
+          <li><span class="icon-warn">!</span><div><strong>脂肪の多い肉（バラ肉等）</strong> — 消化に負担。赤身やひき肉から始める</div></li>
+          <li><span class="icon-warn">!</span><div><strong>カフェイン飲料</strong> — 緑茶・紅茶・コーラ。興奮・睡眠障害の原因に</div></li>
+          <li><span class="icon-warn">!</span><div><strong>辛味（わさび・唐辛子・カレー）</strong> — 刺激が強すぎる。1歳以降も薄味のものから</div></li>
+        </ul>
+      </div>
+
+      <div class="ng-card">
+        <h3 style="color:var(--blue);">🐟 魚介類の注意点</h3>
+        <ul class="ng-list">
+          <li><span class="icon-warn">!</span><div><strong>たこ・いか</strong> — 噛み切りにくい。9ヶ月〜細かく刻んで少量</div></li>
+          <li><span class="icon-warn">!</span><div><strong>貝類（あさり等）</strong> — 加熱でも食中毒リスクあり。1歳〜少量から</div></li>
+          <li><span class="icon-warn">!</span><div><strong>マグロ（脂の多い部位）</strong> — 水銀蓄積の懸念。赤身を少量・週1〜2回まで</div></li>
+          <li><span class="icon-warn">!</span><div><strong>かまぼこ・ちくわ</strong> — 塩分と添加物が多め。少量を味付けとして</div></li>
+        </ul>
+      </div>
+
+      <div class="ng-card">
+        <h3 style="color:var(--green);">✓ 意外と使えるもの</h3>
+        <ul class="ng-list">
+          <li><span class="icon-ok">✓</span><div><strong>豆腐</strong> — 5〜6ヶ月から。裏ごし・加熱で使いやすい優秀食材</div></li>
+          <li><span class="icon-ok">✓</span><div><strong>ヨーグルト（無糖）</strong> — 7ヶ月〜。カルシウム豊富で使いやすい</div></li>
+          <li><span class="icon-ok">✓</span><div><strong>ベビーフード</strong> — 市販品を積極活用OK。栄養バランスが計算されている</div></li>
+          <li><span class="icon-ok">✓</span><div><strong>片栗粉・コーンスターチ</strong> — とろみ付けに使える。飲み込みやすくなる</div></li>
+          <li><span class="icon-ok">✓</span><div><strong>バター・植物油</strong> — 少量ならOK。エネルギー補給になる</div></li>
+          <li><span class="icon-ok">✓</span><div><strong>きな粉</strong> — 5〜6ヶ月〜。大豆たんぱく質が手軽にとれる</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 準備リスト ===== -->
+<section id="prep">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">PREPARATION</div>
+      <h2>離乳食を始める前の準備</h2>
+      <div class="divider bg-s1"></div>
+    </div>
+
+    <div class="checklist-grid">
+      <div class="checklist-card">
+        <h3>🍴 必要な道具</h3>
+        <ul class="check-list">
+          <li><span class="check-icon">□</span>裏ごし器（または電動ブレンダー）</li>
+          <li><span class="check-icon">□</span>すり鉢・すりこぎ</li>
+          <li><span class="check-icon">□</span>シリコンスプーン（赤ちゃん用）</li>
+          <li><span class="check-icon">□</span>深めの小皿・ベビー食器</li>
+          <li><span class="check-icon">□</span>製氷皿 or 離乳食冷凍トレー</li>
+          <li><span class="check-icon">□</span>小鍋（専用にするとラク）</li>
+          <li><span class="check-icon">□</span>ベビーチェア・ハイチェア</li>
+          <li><span class="check-icon">□</span>お食事エプロン（防水タイプ）</li>
+          <li><span class="check-icon">□</span>ビニールシート（床に敷く用）</li>
+        </ul>
+      </div>
+
+      <div class="checklist-card">
+        <h3>🧊 冷凍ストックのコツ</h3>
+        <ul class="check-list">
+          <li><span class="check-icon">✓</span>野菜は茹でて裏ごし後、製氷皿に小さじ1ずつ入れて冷凍</li>
+          <li><span class="check-icon">✓</span>お粥も同様に製氷皿で冷凍しておくと楽</li>
+          <li><span class="check-icon">✓</span>冷凍保存は<strong>1〜2週間</strong>を目安に使い切る</li>
+          <li><span class="check-icon">✓</span>食べる直前にレンジで加熱（中心までしっかり）</li>
+          <li><span class="check-icon">✓</span>ラップで包んでジップロックに入れるとニオイ移りなし</li>
+          <li><span class="check-icon">✓</span>冷凍後は解凍→再冷凍はしない</li>
+        </ul>
+      </div>
+
+      <div class="checklist-card">
+        <h3>📦 常備しておくと便利な食材</h3>
+        <ul class="check-list">
+          <li><span class="check-icon">📦</span>米（普段から少量炊いておく）</li>
+          <li><span class="check-icon">📦</span>絹ごし豆腐（少量パック）</li>
+          <li><span class="check-icon">📦</span>無塩バター</li>
+          <li><span class="check-icon">📦</span>無糖ヨーグルト</li>
+          <li><span class="check-icon">📦</span>食塩不使用だし（昆布・かつお）</li>
+          <li><span class="check-icon">📦</span>片栗粉（とろみ用）</li>
+          <li><span class="check-icon">📦</span>冷凍野菜（ほうれん草・ブロッコリー）</li>
+          <li><span class="check-icon">📦</span>ベビーフード（忙しい日の備え）</li>
+        </ul>
+      </div>
+
+      <div class="checklist-card">
+        <h3>🏥 かかりつけ医への確認事項</h3>
+        <ul class="check-list">
+          <li><span class="check-icon">□</span>離乳食開始の時期（個人差がある）</li>
+          <li><span class="check-icon">□</span>家族にアレルギーがある場合の進め方</li>
+          <li><span class="check-icon">□</span>鉄分補給の必要性（母乳育ちの場合）</li>
+          <li><span class="check-icon">□</span>フッ素ジェル・歯ブラシの使い始め時期</li>
+          <li><span class="check-icon">□</span>アレルギー反応が出た際の対処法</li>
+          <li><span class="check-icon">□</span>近くの小児科・救急の場所を確認</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 成長の目安 ===== -->
+<section style="padding:48px 0;">
+  <div class="container">
+    <div class="growth-section">
+      <div class="section-eyebrow" style="color:var(--blue);">GROWTH</div>
+      <h2 style="color:#2a5f8a;font-size:1.4rem;">月齢別の成長の目安（参考値）</h2>
+      <p style="font-size:0.85rem;color:#4a7a9b;margin-top:8px;">個人差が大きいので、数値より「成長曲線に沿っているか」を重視してください</p>
+      <div class="growth-grid">
+        <div class="growth-card">
+          <div class="age">5〜6ヶ月</div>
+          <div class="weight">6〜8 kg</div>
+          <div class="note">首すわり・寝返り完成</div>
+        </div>
+        <div class="growth-card">
+          <div class="age">7〜8ヶ月</div>
+          <div class="weight">7〜9 kg</div>
+          <div class="note">お座り・ハイハイ開始</div>
+        </div>
+        <div class="growth-card">
+          <div class="age">9〜11ヶ月</div>
+          <div class="weight">8〜10 kg</div>
+          <div class="note">つかまり立ち</div>
+        </div>
+        <div class="growth-card">
+          <div class="age">12ヶ月</div>
+          <div class="weight">9〜11 kg</div>
+          <div class="note">1歳健診。歩き始め</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" style="padding:48px 0 64px;">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">FAQ</div>
+      <h2>よくある疑問Q&amp;A</h2>
+      <div class="divider bg-s1"></div>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">食べてくれない日が続いています。無理に食べさせるべきですか？</div>
+        <div class="faq-a">無理強いは禁物です。<strong>食事を「楽しい時間」として覚えてもらうことが最優先</strong>。嫌がったらその日は終わりにして、次の日に試しましょう。食べない時期は必ずあります。授乳・ミルクで栄養は補えているので焦らないで大丈夫です。日を変えると急に食べるようになることも多いです。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">出汁（だし）は使っていいですか？</div>
+        <div class="faq-a"><strong>使ってOKです。むしろ積極的に活用しましょう。</strong>昆布だし・かつおだしは5〜6ヶ月から使えます。市販のだしパック・顆粒だしは塩分・添加物が多いので「食塩不使用」タイプを選んでください。だしの旨みを使うと味付けが薄くても美味しくなります。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">ベビーフード（市販品）を使っても大丈夫ですか？</div>
+        <div class="faq-a"><strong>大丈夫です。毎食手作りにこだわる必要はありません。</strong>市販のベビーフードは栄養バランスや安全性が厳しく管理されています。外出時・忙しい日・手作りの味に飽きたときなどに積極活用してください。「手作り＋市販」の組み合わせが現実的です。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">うんちの色や形が変わりました。大丈夫ですか？</div>
+        <div class="faq-a">離乳食が始まると便の変化はよくあることです。<strong>にんじんを食べたらオレンジ色、ほうれん草なら緑色になることも。</strong>下痢や血便・白い便が続く、発熱・嘔吐を伴う場合はかかりつけ医に相談してください。便秘には野菜・果物・水分を増やすと改善することが多いです。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">アレルギー反応が疑われます。どうすれば良いですか？</div>
+        <div class="faq-a">食べてから<strong>2時間以内</strong>に、口周りや身体の赤み・じんましん・嘔吐・呼吸の異変が出たらすぐに食べるのをやめてください。症状が軽い場合はかかりつけ医に電話。<strong>呼吸困難・顔全体のむくみ・意識の変化がある場合は即救急（119番）</strong>。何を食べたか・何分後に症状が出たかをメモしておくと診察に役立ちます。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">母乳育児中ですが、いつ卒乳すれば良いですか？</div>
+        <div class="faq-a"><strong>WHO・厚生労働省ともに「2歳頃まで母乳継続」を推奨しています。</strong>離乳食が進んでも母乳を続けることは免疫面・精神面でメリットがあります。卒乳のタイミングは母子の状況に合わせて決めれば大丈夫。1歳以降、食事でしっかり栄養がとれるようになってから自然に卒乳するケースが多いです。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">食物アレルギーは早めに食べさせると予防できますか？</div>
+        <div class="faq-a">近年の研究では<strong>「適切な時期に適切な量を食べさせることがアレルギー発症予防につながる」</strong>という考え方が広まっています（特に卵・ピーナッツ）。ただし、方法を誤るとリスクも。アレルギー家族歴がある場合は、自己判断せず小児科医に相談してから進めてください。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <strong>離乳食ガイド</strong><br>
+  <br>
+  ※ このガイドは一般的な目安です。赤ちゃんの個人差は大きいため、<br>
+  疑問や心配な点はかかりつけの小児科医に相談してください。<br>
+  <br>
+  <small>参考：厚生労働省「授乳・離乳の支援ガイド（2019年改定版）」</small>
+</footer>
+
+</body>
+</html>
