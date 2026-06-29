@@ -689,7 +689,114 @@
     .bg-s2 { background: #e05f3a; }
     .bg-s3 { background: #c0442a; }
     .bg-s4 { background: #8b2c14; }
+
+    /* ===== カレンダー ===== */
+    .cal-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .cal-tab {
+      padding: 8px 22px;
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      background: var(--card);
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: inherit;
+    }
+    .cal-tab:hover { border-color: var(--c1); color: var(--c1); }
+    .cal-tab.active { background: var(--c1); border-color: var(--c1); color: #fff; }
+
+    .cal-month-label {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--c3);
+      margin-bottom: 16px;
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+    .cal-dow {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--muted);
+      padding: 7px 0;
+      background: #fdf0e8;
+      border-radius: 6px;
+    }
+    .cal-dow:first-child { color: var(--red); }
+    .cal-dow:last-child { color: var(--blue); }
+
+    .cal-day {
+      background: var(--card);
+      border-radius: 8px;
+      padding: 7px 6px 6px;
+      min-height: 96px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .cal-day.empty { background: transparent; box-shadow: none; }
+    .cal-day.sunday .cal-num { color: var(--red); }
+    .cal-day.saturday .cal-num { color: var(--blue); }
+
+    .cal-num {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+    }
+    .cal-memo {
+      flex: 1;
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      font-size: 0.72rem;
+      font-family: inherit;
+      color: var(--text);
+      resize: none;
+      padding: 4px 5px;
+      background: #fffaf8;
+      line-height: 1.45;
+      min-height: 62px;
+      transition: border-color .2s, background .15s;
+    }
+    .cal-memo:focus {
+      outline: none;
+      border-color: var(--c1);
+      background: #fff;
+    }
+    .cal-memo::placeholder { color: #d0c0b5; font-size: 0.68rem; }
+
+    @media (max-width: 680px) {
+      .cal-day { min-height: 72px; padding: 5px 4px; }
+      .cal-memo { min-height: 44px; font-size: 0.65rem; }
+    }
+    @media (max-width: 420px) {
+      .cal-grid { gap: 3px; }
+      .cal-day { min-height: 58px; }
+      .cal-memo { min-height: 32px; }
+    }
+    .cal-status {
+      font-size: 0.8rem;
+      color: var(--muted);
+      min-height: 22px;
+      margin-bottom: 8px;
+    }
+    .cal-status.saving { color: var(--c1); }
+    .cal-status.saved  { color: var(--green); }
+    .cal-status.error  { color: var(--red); }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 </head>
 <body>
 
@@ -707,6 +814,7 @@
       <a href="#ng">NG食材</a>
       <a href="#prep">準備</a>
       <a href="#faq">Q&amp;A</a>
+      <a href="#calendar">📅 記録</a>
     </div>
   </div>
 </nav>
@@ -1759,6 +1867,21 @@
   </div>
 </section>
 
+<!-- ===== 記録カレンダー ===== -->
+<section id="calendar" style="padding:64px 0 32px;background:#fffbf8;">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">RECORD</div>
+      <h2>離乳食記録カレンダー</h2>
+      <div class="divider bg-s1"></div>
+      <p>2026年7〜12月の記録をつけましょう。メモはこのブラウザに自動保存されます。</p>
+    </div>
+    <div class="cal-tabs" id="calTabs"></div>
+    <div id="calStatus" class="cal-status"></div>
+    <div id="calContainer"></div>
+  </div>
+</section>
+
 <!-- ===== FOOTER ===== -->
 <footer>
   <strong>離乳食ガイド</strong><br>
@@ -1769,5 +1892,138 @@
   <small>参考：厚生労働省「授乳・離乳の支援ガイド（2019年改定版）」</small>
 </footer>
 
+<script>
+(function () {
+  var SUPABASE_URL = 'https://rbhbwmecembcxcqmyhun.supabase.co';
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaGJ3bWVjZW1iY3hjcW15aHVuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0MDc4NDksImV4cCI6MjA5Njk4Mzg0OX0.BT-Nb_0T1npC9dwUVqAPFfZ8fyOxv6Xerf6SO9H3ZP4';
+  var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  var MONTHS = [
+    { month: 7,  name: '7月',  days: 31, startDow: 3 },
+    { month: 8,  name: '8月',  days: 31, startDow: 6 },
+    { month: 9,  name: '9月',  days: 30, startDow: 2 },
+    { month: 10, name: '10月', days: 31, startDow: 4 },
+    { month: 11, name: '11月', days: 30, startDow: 0 },
+    { month: 12, name: '12月', days: 31, startDow: 2 },
+  ];
+  var DOW = ['日', '月', '火', '水', '木', '金', '土'];
+  var activeMonth = 7;
+  var timers = {};
+
+  function dateKey(month, day) {
+    return '2026-' + String(month).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+  }
+
+  function setStatus(msg, type) {
+    var el = document.getElementById('calStatus');
+    if (!el) return;
+    el.textContent = msg;
+    el.className = 'cal-status' + (type ? ' ' + type : '');
+  }
+
+  async function loadMonth(month) {
+    setStatus('読み込み中...', 'saving');
+    var pattern = '2026-' + String(month).padStart(2, '0') + '-%';
+    var result = await sb.from('rinyusyoku_memos').select('date,memo').like('date', pattern);
+    if (result.error) { setStatus('⚠ 読み込みに失敗しました', 'error'); return {}; }
+    setStatus('');
+    var map = {};
+    (result.data || []).forEach(function (row) { map[row.date] = row.memo; });
+    return map;
+  }
+
+  async function saveMemo(dk, text) {
+    setStatus('保存中...', 'saving');
+    var err;
+    if (text) {
+      var r = await sb.from('rinyusyoku_memos').upsert({ date: dk, memo: text, updated_at: new Date().toISOString() });
+      err = r.error;
+    } else {
+      var r = await sb.from('rinyusyoku_memos').delete().eq('date', dk);
+      err = r.error;
+    }
+    if (err) { setStatus('⚠ 保存に失敗しました', 'error'); return; }
+    setStatus('保存しました ✓', 'saved');
+    setTimeout(function () { setStatus(''); }, 2000);
+  }
+
+  function renderTabs() {
+    var el = document.getElementById('calTabs');
+    el.innerHTML = '';
+    MONTHS.forEach(function (m) {
+      var btn = document.createElement('button');
+      btn.className = 'cal-tab' + (m.month === activeMonth ? ' active' : '');
+      btn.textContent = m.name;
+      btn.addEventListener('click', function () {
+        activeMonth = m.month;
+        renderTabs();
+        renderCalendar();
+      });
+      el.appendChild(btn);
+    });
+  }
+
+  async function renderCalendar() {
+    var container = document.getElementById('calContainer');
+    container.innerHTML = '<div style="padding:32px;text-align:center;color:var(--muted);">読み込み中...</div>';
+    var memos = await loadMonth(activeMonth);
+    var m = MONTHS.find(function (x) { return x.month === activeMonth; });
+    container.innerHTML = '';
+
+    var label = document.createElement('div');
+    label.className = 'cal-month-label';
+    label.textContent = '2026年' + m.name;
+    container.appendChild(label);
+
+    var grid = document.createElement('div');
+    grid.className = 'cal-grid';
+
+    DOW.forEach(function (d) {
+      var h = document.createElement('div');
+      h.className = 'cal-dow';
+      h.textContent = d;
+      grid.appendChild(h);
+    });
+
+    for (var i = 0; i < m.startDow; i++) {
+      var empty = document.createElement('div');
+      empty.className = 'cal-day empty';
+      grid.appendChild(empty);
+    }
+
+    for (var day = 1; day <= m.days; day++) {
+      var dow = (m.startDow + day - 1) % 7;
+      var cell = document.createElement('div');
+      cell.className = 'cal-day' + (dow === 0 ? ' sunday' : dow === 6 ? ' saturday' : '');
+
+      var num = document.createElement('div');
+      num.className = 'cal-num';
+      num.textContent = day;
+      cell.appendChild(num);
+
+      var memo = document.createElement('textarea');
+      memo.className = 'cal-memo';
+      memo.placeholder = 'メモ';
+      var dk = dateKey(m.month, day);
+      memo.value = memos[dk] || '';
+
+      memo.addEventListener('input', (function (dk, ta) {
+        return function () {
+          clearTimeout(timers[dk]);
+          timers[dk] = setTimeout(function () { saveMemo(dk, ta.value); }, 800);
+        };
+      })(dk, memo));
+
+      cell.appendChild(memo);
+      grid.appendChild(cell);
+    }
+
+    container.appendChild(grid);
+  }
+
+  renderTabs();
+  renderCalendar();
+})();
+</script>
 </body>
 </html>
